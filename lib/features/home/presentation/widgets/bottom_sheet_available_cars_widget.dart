@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taxi_app/features/authontication/presentation/widgets/text_widget.dart';
 
 import '../../../../core/app_colors.dart';
+import '../../../payment/presentation/screens/payment_cards_screen.dart';
 import 'available_list_cars.dart';
 
 class BottomSheetAvailableCarsWidget extends StatefulWidget{
@@ -48,7 +49,7 @@ class _BottomSheetAvailableCarsWidgetState extends State<BottomSheetAvailableCar
               SizedBox(width: 15,),
               ElevatedButton(
                   onPressed: (){
-
+                      Navigator.pushNamed(context, PaymentCardsScreen.routeName);
                   },
                   child: Text ("Confirm") , style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor , shape: StadiumBorder()),)

@@ -10,6 +10,7 @@ import 'package:taxi_app/features/authontication/presentation/screens/login_scre
 import 'package:taxi_app/features/authontication/presentation/screens/otp_screen.dart';
 
 import 'features/home/presentation/screens/home_screen.dart';
+import 'features/payment/presentation/screens/payment_cards_screen.dart';
 import 'features/profile_settings/presentation/screens/get_data_fireBase_screen.dart';
 import 'features/profile_settings/presentation/screens/profile_screen.dart';
 import 'features/profile_settings/presentation/screens/profile_screen_data.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget{
         ProfileScreen.routeName :(context) => ProfileScreen(),
         ProfileDataScreen.routeName :(context) => ProfileDataScreen(),
         GetDataFromFire.routeName : (context) => GetDataFromFire(),
+        PaymentCardsScreen.routeName : (context) => PaymentCardsScreen(),
       },
       locale: Locale ("en"),
       theme: AppTheming.lightTheme,
