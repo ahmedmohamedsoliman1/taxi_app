@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taxi_app/config/fireBase_funs.dart';
 import 'package:taxi_app/features/profile_settings/presentation/screens/get_data_fireBase_screen.dart';
 
+import '../../../payment/presentation/screens/payment_cards_screen.dart';
 import '../../../profile_settings/data/models/profile_model.dart';
 import '../../../profile_settings/presentation/screens/profile_screen.dart';
 import 'custom_text_widget.dart';
@@ -81,6 +82,7 @@ class DrawerWidget extends StatelessWidget{
           customTextWidget (color: Colors.black , fontWeight: FontWeight.bold , fontSize: 20 ,text: "Payment History" ,
           onPressed: (){
             Navigator.pop(context);
+            Navigator.pushNamed(context, PaymentCardsScreen.routeName);
           }),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02,),
           customTextWidget (color: Colors.black , fontWeight: FontWeight.bold , fontSize: 20 ,text: "Ride History" ,

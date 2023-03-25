@@ -9,19 +9,20 @@ import 'package:taxi_app/features/authontication/presentation/screens/login_scre
 import 'package:taxi_app/features/profile_settings/presentation/screens/profile_screen.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/app_strings.dart';
-import '../../../profile_settings/presentation/screens/get_data_fireBase_screen.dart';
-import '../widgets/back_ground_widget.dart';
-import '../widgets/text_widget.dart';
+import '../../../authontication/presentation/widgets/back_ground_widget.dart';
+import '../../../authontication/presentation/widgets/text_widget.dart';
+import 'driver_input_profile_screen.dart';
+import 'driver_login_screen.dart';
 
-class OTPScreen extends StatefulWidget{
+class DriverOTPScreen extends StatefulWidget{
 
-  static const String routeName = "otp";
+  static const String routeName = "driver_otp";
 
   @override
-  State<OTPScreen> createState() => _OTPScreenState();
+  State<DriverOTPScreen> createState() => _DriverOTPScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _DriverOTPScreenState extends State<DriverOTPScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String code = "" ;
   final defaultPinTheme = PinTheme(
@@ -45,21 +46,21 @@ class _OTPScreenState extends State<OTPScreen> {
             child: Column (
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-               Stack(
-                 children: [
-                   BackGroundWidget(),
-                   Positioned(
-                     top: 50,
-                     left: 30,
-                     child: CircleAvatar(
-                       backgroundColor: Colors.white,
-                       child: IconButton(onPressed: (){
-                         Navigator.pop(context);
-                       }, icon: Icon(Icons.arrow_back , color: AppColors.primaryColor,)),
-                     ),
-                   ),
-                 ],
-               ),
+                Stack(
+                  children: [
+                    BackGroundWidget(),
+                    Positioned(
+                      top: 50,
+                      left: 30,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back , color: AppColors.primaryColor,)),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(height: MediaQuery.of(context).size.height*0.04,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -75,29 +76,29 @@ class _OTPScreenState extends State<OTPScreen> {
                   onChanged: (value){
                     code = value ;
                   },
-              defaultPinTheme: defaultPinTheme,
-              validator: (s) {
-                return s == code ? null : 'Pin is incorrect';
-              },
-              pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-              showCursor: true,
-              onCompleted: (pin) => print(pin),
-            ),
+                  defaultPinTheme: defaultPinTheme,
+                  validator: (s) {
+                    return s == code ? null : 'Pin is incorrect';
+                  },
+                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                  showCursor: true,
+                  onCompleted: (pin) => print(pin),
+                ),
                 SizedBox(height: MediaQuery.of(context).size.height*0.01,),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 30),
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(onPressed: () async{
                     try {
-                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginScreen.verify,
+                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: DriverLoginScreen.verify,
                           smsCode: code);
 
                       // Sign the user in (or link) with the credential
                       await auth.signInWithCredential(credential);
                       String userId = FirebaseAuth.instance.currentUser.uid;
-                      UserModel userModer = UserModel(id:  userId , phone: args["phone"] , isAdriver: false);
-                     var userObject =  await FireBaseFuns.saveUser(userModer);
-                      Navigator.pushReplacementNamed(context, ProfileScreen.routeName);
+                      UserModel userModer = UserModel(id:  userId , phone: args["phone"] , isAdriver: true);
+                      var userObject =  await FireBaseFuns.saveUser(userModer);
+                      Navigator.pushReplacementNamed(context, DriverProfileScreen.routeName);
                       var getUserData = await FireBaseFuns.getUser(userId);
                       provider.user = getUserData ;
                     }catch (e){
@@ -105,7 +106,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     }
                   }, child: Text("Verify phone number" , style: TextStyle(fontSize: 18),) ,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor , shape: StadiumBorder()),),
+                        backgroundColor: AppColors.primaryColor , shape: StadiumBorder()),),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),

@@ -4,8 +4,8 @@ import 'package:taxi_app/features/home/presentation/screens/home_screen.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/app_strings.dart';
 import '../../../authontication/presentation/widgets/text_widget.dart';
-import '../widgets/bottom_sheet_widget.dart';
-import '../widgets/container_widget.dart';
+import '../../../profile_settings/presentation/widgets/container_widget.dart';
+import 'driver_bottom_sheet.dart';
 
 class ProfileDataScreen extends StatefulWidget{
   static const String routeName = "profile_data";
@@ -94,7 +94,7 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
                 .height * 0.01,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Home address",
+              child: textWidget(text: "Email",
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
@@ -108,40 +108,6 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
                 .of(context)
                 .size
                 .height * 0.01,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Business address",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-            widget.business != null
-                ? containerWidget(context, widget.business)
-                : Text(""),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Shopping center",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-                widget.shopping != null
-                ? containerWidget(context, widget.shopping)
-                : Text(""),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.02,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(onPressed: () {
@@ -160,7 +126,6 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(onPressed: () {
-                Navigator.pushReplacementNamed(context, HomeScreen.routeName);
               },
                 child: textWidget(
                     text: "Go to home", color: Colors.white, fontSize: 20)
@@ -176,6 +141,6 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
 
   void showSheet() {
     showModalBottomSheet(
-        context: context, builder: (context) => BottomSheetWidget ());
+        context: context, builder: (context) => DriverBottomSheetWidget ());
   }
 }

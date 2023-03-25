@@ -4,23 +4,25 @@ import 'package:taxi_app/features/home/presentation/screens/home_screen.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/app_strings.dart';
 import '../../../authontication/presentation/widgets/text_widget.dart';
-import '../widgets/bottom_sheet_widget.dart';
-import '../widgets/container_widget.dart';
+import '../../../driver_rejestration/presentation/screens/complete_registration_one.dart';
+import '../../../profile_settings/presentation/widgets/container_widget.dart';
+import '../widgets/driver_bottom_sheet.dart';
 
-class ProfileDataScreen extends StatefulWidget{
-  static const String routeName = "profile_data";
+
+class DriverProfileDataScreen extends StatefulWidget{
+  static const String routeName = "driver_profile_data";
   String name ;
   String home ;
   String shopping ;
   String image ;
   String business ;
-  ProfileDataScreen ({this.name , this.image , this.home , this.business , this.shopping});
+  DriverProfileDataScreen ({this.name , this.image , this.home , this.business , this.shopping});
 
   @override
-  State<ProfileDataScreen> createState() => _ProfileDataScreenState();
+  State<DriverProfileDataScreen> createState() => _DriverProfileDataScreenState();
 }
 
-class _ProfileDataScreenState extends State<ProfileDataScreen> {
+class _DriverProfileDataScreenState extends State<DriverProfileDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +96,7 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
                 .height * 0.01,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Home address",
+              child: textWidget(text: "Email",
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
@@ -104,40 +106,6 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
                 .height * 0.01,),
             widget.home != null ? containerWidget(context, widget.home) : Text(
                 ""),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Business address",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-            widget.business != null
-                ? containerWidget(context, widget.business)
-                : Text(""),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: textWidget(text: "Shopping center",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.01,),
-                widget.shopping != null
-                ? containerWidget(context, widget.shopping)
-                : Text(""),
             SizedBox(height: MediaQuery
                 .of(context)
                 .size
@@ -160,10 +128,10 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(onPressed: () {
-                Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                Navigator.pushReplacementNamed(context, CompleteDreinerRegisterationOne.routeName);
               },
                 child: textWidget(
-                    text: "Go to home", color: Colors.white, fontSize: 20)
+                    text: "Go to contiue registeration", color: Colors.white, fontSize: 20)
                 ,
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor),),
@@ -176,6 +144,6 @@ class _ProfileDataScreenState extends State<ProfileDataScreen> {
 
   void showSheet() {
     showModalBottomSheet(
-        context: context, builder: (context) => BottomSheetWidget ());
+        context: context, builder: (context) => DriverBottomSheetWidget ());
   }
 }

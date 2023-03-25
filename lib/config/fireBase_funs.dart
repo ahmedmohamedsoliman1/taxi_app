@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../features/authontication/data/user_model.dart';
+import '../features/payment/data/models/card_model.dart';
 import '../features/profile_settings/data/models/profile_model.dart';
 
 class FireBaseFuns{
@@ -51,5 +52,27 @@ class FireBaseFuns{
     var documentSnapShot = await getUserCollectionFromFirebase().doc(userId).get();
     return documentSnapShot.data();
   }
+
+  /// card
+  static CollectionReference<CardModel> getCardCollectionFromFirebase (String userId){
+    return FirebaseFirestore.instance.collection('user').doc(userId).collection("card").withConverter<CardModel>(
+      fromFirestore: (snapshot, _) => CardModel.fromJson(snapshot.data()),
+      toFirestore: (card, _) => card.toJson(),
+    );
+  }
+
+  static Future<void> addCardToFireBase (CardModel cardModel){
+   String userId = FirebaseAuth.instance.currentUser.uid ;
+   var collection =  getCardCollectionFromFirebase(userId);
+   var doc = collection.doc();
+   cardModel.id = doc.id ;
+   return doc.set(cardModel) ;
+  }
+
+  static Stream<QuerySnapshot<CardModel>> getCardFromFireBase (){
+    String userId = FirebaseAuth.instance.currentUser.uid ;
+    return getCardCollectionFromFirebase(userId).snapshots();
+  }
+
 
 }

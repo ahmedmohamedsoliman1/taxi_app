@@ -49,7 +49,7 @@ class _BottomSheetAvailableCarsWidgetState extends State<BottomSheetAvailableCar
               SizedBox(width: 15,),
               ElevatedButton(
                   onPressed: (){
-                      Navigator.pushNamed(context, PaymentCardsScreen.routeName);
+
                   },
                   child: Text ("Confirm") , style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor , shape: StadiumBorder()),)
