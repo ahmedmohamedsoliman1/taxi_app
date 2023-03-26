@@ -44,6 +44,7 @@ dependencies:
   google_maps_webservice: ^0.0.19
   geocoding: ^2.1.0
   flutter_credit_card: ^3.0.6
+  simple_month_year_picker: ^0.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
